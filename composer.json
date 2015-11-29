@@ -1,0 +1,14 @@
+{
+    "name": "jneumann/home",
+    "authors": [
+        {
+            "name": "Jake Neumann",
+            "email": "thejakeneumann@gmail.com"
+        }
+    ],
+    "require": {
+			"j7mbo/twitter-api-php": "*",
+			"podio/podio-php": "*",
+			"popthestack/fitbit": "dev-master"
+		}
+}
