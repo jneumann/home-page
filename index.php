@@ -93,6 +93,26 @@
 			<hr />
 			<div class="twitter row">
 				<h1>Twitter</h1>
+				<div class="col-sm-8 col-sm-push-2">
+				<?php
+					$tweets = require('functions/twitter.php');
+
+					foreach($tweets as $k => $v) {
+						echo "<div class='row'>";
+						echo "<div class='col-sm-12'>";
+						echo "<img src='" . $v->user->profile_image_url . "' />";
+						if(isset($v->entities->urls['0']->url)) {
+							echo "<a href='" . $v->entities->urls['0']->url . "' target='_blank'>";
+						}
+						echo $v->text;
+						if(isset($v->entities->urls['0']->url)) {
+							echo "</a>";
+						}
+						echo "</div>";
+						echo "</div>";
+					}
+				?>
+			</div>
 			</div>
 			<hr />
 			<div class="podio row">
