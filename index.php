@@ -100,7 +100,14 @@
 					foreach($tweets as $k => $v) {
 						echo "<div class='row'>";
 						echo "<div class='col-sm-12'>";
+						echo "<a href='http://twitter.com/" . $v->user->screen_name . "' target='_blank'>";
 						echo "<img src='" . $v->user->profile_image_url . "' />";
+						echo "</a>";
+						echo '<h3>';
+						echo "<a href='http://twitter.com/" . $v->user->screen_name . "' target='_blank' style='color:#000'>";
+						echo $v->user->name;
+						echo "</a>";
+						echo '</h3>';
 						if(isset($v->entities->urls['0']->url)) {
 							echo "<a href='" . $v->entities->urls['0']->url . "' target='_blank'>";
 						}
