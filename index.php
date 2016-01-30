@@ -21,33 +21,46 @@
 				<h1>Welcome Home</h1>
 			</div>
 			<div class="links row">
-				<div class="col-lg-2 col-sm-2">
-					<img src="https://www.atlassian.com/wac/sectionWrap/08/column/02/moreContent/0/imageBinary/logo_bitbucket-blue.svg" />
-					<a href="http://bitbucket.com">Bitbucket</a>
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<a hrf="http://bitbucket.com">
+						<img src="images/Bitbucket.svg" />
+						Bitbucket
+					</a>
 				</div>
-				<div class="col-lg-2 col-sm-2">
-					<img src="images/github.svg" />
-					<a href="http://github.com">Github</a>
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<a href="http://github.com">
+						<img src="images/github.svg" />
+						Github
+					</a>
 				</div>
-				<div class="col-lg-2 col-sm-2">
-					<img src="images/facebook.svg" />
-					<a href="http://facebook.com">Facebook</a>
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<a href="http://facebook.com">
+						<img src="images/facebook.svg" />
+						Facebook
+					</a>
 				</div>
-				<div class="col-lg-2 col-sm-2">
-					<img src="images/php.svg" />
-					<a href="http://sites.hdg/info.php">PhpInfo</a>
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<a href="http://sites.hdg/info.php">
+						<img src="images/php.svg" />
+						PhpInfo
+					</a>
 				</div>
-				<div class="col-lg-2 col-sm-2">
-					<img src="http://www.ycombinator.com/images/ycombinator-logo-fb889e2e.png" />
-					<a href="http://news.ycombinator.com">Hacker News</a>
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<a href="http://news.ycombinator.com">
+						<img src="images/y-combinator.svg" />
+						Hacker News
+					</a>
 				</div>
-				<div class="col-lg-2 col-sm-2">
-					<img src="http://s.cafebazaar.ir/1/upload/icons/com.devhd.feedly.png" />
-					<a href="http://feedly.com">Feedly</a>
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<a href="http://feedly.com">
+						<img src="http://s.cafebazaar.ir/1/upload/icons/com.devhd.feedly.png" />
+						Feedly
+					</a>
 				</div>
 			</div>
 			<hr />
-			<div class="classdojo row">
+			<div class="row">
+			<div class="classdojo col-md-6">
 				<div class="col-sm-12">
 					<h1>Class Dojo</h1>
 				</div>
@@ -90,10 +103,9 @@
 					?>
 				</div>
 			</div>
-			<hr />
-			<div class="twitter row">
+			<div class="twitter col-md-6">
 				<h1>Twitter</h1>
-				<div class="col-sm-8 col-sm-push-2">
+				<div class="">
 				<?php
 					$tweets = require('functions/twitter.php');
 
@@ -119,6 +131,7 @@
 						echo "</div>";
 					}
 				?>
+			</div>
 			</div>
 			</div>
 			<hr />
