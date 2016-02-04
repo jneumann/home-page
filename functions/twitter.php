@@ -1,5 +1,5 @@
 <?php
-	require('../config.php');
+	require('config.php');
 	require('vendor/autoload.php');
 	$twitter = new TwitterAPIExchange($config['twitter']);
 
