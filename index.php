@@ -21,37 +21,37 @@
 				<h1>Welcome Home</h1>
 			</div>
 			<div class="links row">
-				<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a hrf="http://bitbucket.com">
 						<img src="images/Bitbucket.svg" />
 						Bitbucket
 					</a>
 				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a href="http://github.com">
 						<img src="images/github.svg" />
 						Github
 					</a>
 				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a href="http://facebook.com">
 						<img src="images/facebook.svg" />
 						Facebook
 					</a>
 				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a href="http://sites.hdg/info.php">
 						<img src="images/php.svg" />
 						PhpInfo
 					</a>
 				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a href="http://news.ycombinator.com">
 						<img src="images/y-combinator.svg" />
 						Hacker News
 					</a>
 				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6">
+				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a href="http://feedly.com">
 						<img src="http://s.cafebazaar.ir/1/upload/icons/com.devhd.feedly.png" />
 						Feedly
@@ -59,6 +59,39 @@
 				</div>
 			</div>
 			<hr />
+			<div class="row">
+				<div class="weather col-sm-12">
+					<?php
+						$cu = curl_init();
+						curl_setopt($cu, CURLOPT_URL, 'https://api.forecast.io/forecast/0b99f4b010921b26f03d8c216358378d/41.3510,-88.8391');
+						curl_setopt($cu, CURLOPT_HTTPHEADER, $config['classdojo']);
+						curl_setopt($cu, CURLOPT_RETURNTRANSFER, 1);
+						$weather = curl_exec($cu);
+						curl_close($cu);
+
+						$weather = json_decode($weather);
+					?>
+					<h1>Weather</h1>
+					<div class="col-sm-6">
+					<h3>Today</h3>
+					<p>
+						<?php
+							echo $weather->daily->data[0]->summary . '<br />';
+							echo round($weather->currently->apparentTemperature, 0) . '&#176;<br />';
+						?>
+					</p>
+					</div>
+					<div class="col-sm-6">
+					<h3>Tomorrow</h3>
+					<p>
+						<?php
+							echo $weather->daily->data[1]->summary . '<br />';
+							echo round($weather->daily->data[1]->apparentTemperatureMin, 0) . '&#176; -' . round($weather->daily->data[1]->apparentTemperatureMax, 0) . '&#176;<br />';
+						?>
+					</p>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 			<div class="classdojo col-md-6">
 				<div class="col-sm-12">
