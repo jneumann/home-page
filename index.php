@@ -60,7 +60,7 @@
 			</div>
 			<hr />
 			<div class="row">
-				<div class="weather col-sm-12">
+				<div class="weather col-md-4 col-lg-3">
 					<?php
 						$cu = curl_init();
 						curl_setopt($cu, CURLOPT_URL, 'https://api.forecast.io/forecast/0b99f4b010921b26f03d8c216358378d/41.3510,-88.8391');
@@ -74,6 +74,7 @@
 					<h1>Weather</h1>
 					<div class="col-sm-6">
 					<h3>Today</h3>
+					<i class="wi wi-forecast-io-<?php echo $weather->daily->data[0]->icon; ?>"></i>
 					<p>
 						<?php
 							echo $weather->daily->data[0]->summary . '<br />';
@@ -83,12 +84,43 @@
 					</div>
 					<div class="col-sm-6">
 					<h3>Tomorrow</h3>
+					<i class="wi wi-forecast-io-<?php echo $weather->daily->data[1]->icon; ?>"></i>
 					<p>
 						<?php
 							echo $weather->daily->data[1]->summary . '<br />';
 							echo round($weather->daily->data[1]->apparentTemperatureMin, 0) . '&#176; -' . round($weather->daily->data[1]->apparentTemperatureMax, 0) . '&#176;<br />';
 						?>
 					</p>
+					</div>
+				</div>
+				<div class="twitter col-md-8 col-lg-9">
+					<h1>Twitter</h1>
+					<div class="">
+					<?php
+						$tweets = require('functions/twitter.php');
+
+						foreach($tweets as $k => $v) {
+							echo "<div class='row'>";
+							echo "<div class='col-sm-12'>";
+							echo "<a href='http://twitter.com/" . $v->user->screen_name . "' target='_blank'>";
+							echo "<img src='" . $v->user->profile_image_url . "' />";
+							echo "</a>";
+							echo '<h3>';
+							echo "<a href='http://twitter.com/" . $v->user->screen_name . "' target='_blank' style='color:#000'>";
+							echo $v->user->name;
+							echo "</a>";
+							echo '</h3>';
+							if(isset($v->entities->urls['0']->url)) {
+								echo "<a href='" . $v->entities->urls['0']->url . "' target='_blank'>";
+							}
+							echo $v->text;
+							if(isset($v->entities->urls['0']->url)) {
+								echo "</a>";
+							}
+							echo "</div>";
+							echo "</div>";
+						}
+					?>
 					</div>
 				</div>
 			</div>
@@ -135,36 +167,6 @@
 						echo '<p>' . $mes->body . '</p>';
 					?>
 				</div>
-			</div>
-			<div class="twitter col-md-6">
-				<h1>Twitter</h1>
-				<div class="">
-				<?php
-					$tweets = require('functions/twitter.php');
-
-					foreach($tweets as $k => $v) {
-						echo "<div class='row'>";
-						echo "<div class='col-sm-12'>";
-						echo "<a href='http://twitter.com/" . $v->user->screen_name . "' target='_blank'>";
-						echo "<img src='" . $v->user->profile_image_url . "' />";
-						echo "</a>";
-						echo '<h3>';
-						echo "<a href='http://twitter.com/" . $v->user->screen_name . "' target='_blank' style='color:#000'>";
-						echo $v->user->name;
-						echo "</a>";
-						echo '</h3>';
-						if(isset($v->entities->urls['0']->url)) {
-							echo "<a href='" . $v->entities->urls['0']->url . "' target='_blank'>";
-						}
-						echo $v->text;
-						if(isset($v->entities->urls['0']->url)) {
-							echo "</a>";
-						}
-						echo "</div>";
-						echo "</div>";
-					}
-				?>
-			</div>
 			</div>
 			</div>
 			<hr />
