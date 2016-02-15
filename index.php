@@ -125,49 +125,66 @@
 				</div>
 			</div>
 			<div class="row">
-			<div class="classdojo col-md-6">
-				<div class="col-sm-12">
-					<h1>Class Dojo</h1>
-				</div>
-					<?php
-						$cu = curl_init();
-						curl_setopt($cu, CURLOPT_URL, 'https://home.classdojo.com/api/parent/5603218c458be92d1d471717/student');
-						curl_setopt($cu, CURLOPT_HTTPHEADER, $config['classdojo']);
-						curl_setopt($cu, CURLOPT_RETURNTRANSFER, 1);
-						$res = curl_exec($cu);
-						curl_close($cu);
+				<div class="classdojo col-md-6">
+					<div class="col-sm-12">
+						<h1>Class Dojo</h1>
+					</div>
+						<?php
+							$cu = curl_init();
+							curl_setopt($cu, CURLOPT_URL, 'https://home.classdojo.com/api/parent/5603218c458be92d1d471717/student');
+							curl_setopt($cu, CURLOPT_HTTPHEADER, $config['classdojo']);
+							curl_setopt($cu, CURLOPT_RETURNTRANSFER, 1);
+							$res = curl_exec($cu);
+							curl_close($cu);
 
-						$cu = curl_init();
-						curl_setopt($cu, CURLOPT_URL, 'https://home.classdojo.com/api/storyPost');
-						curl_setopt($cu, CURLOPT_HTTPHEADER, $config['classdojo']);
-						curl_setopt($cu, CURLOPT_RETURNTRANSFER, 1);
-						$mes = curl_exec($cu);
-						curl_close($cu);
-						$res = json_decode($res);
-						$res = $res->_items[0];
-						$mes = json_decode($mes);
-						$mes = $mes->_items[0];
-					?>
-				<div class="col-sm-6">
-					<?php
-						echo '<h3>Teacher</h3> ' . $res->teacher->title . ' ' . $res->teacher->lastName . '<br />';
-					?>
+							$cu = curl_init();
+							curl_setopt($cu, CURLOPT_URL, 'https://home.classdojo.com/api/storyPost');
+							curl_setopt($cu, CURLOPT_HTTPHEADER, $config['classdojo']);
+							curl_setopt($cu, CURLOPT_RETURNTRANSFER, 1);
+							$mes = curl_exec($cu);
+							curl_close($cu);
+							$res = json_decode($res);
+							$res = $res->_items[0];
+							$mes = json_decode($mes);
+							$mes = $mes->_items[0];
+						?>
+					<div class="col-sm-6">
+						<?php
+							echo '<h3>Teacher</h3> ' . $res->teacher->title . ' ' . $res->teacher->lastName . '<br />';
+						?>
+					</div>
+					<div class="col-sm-6">
+						<?php
+							echo '<h3>Points</h3> ' .  $res->currentPoints . '<br />';
+						?>
+					</div>
+					<div class="col-sm-12">
+						<?php
+							echo '<h3>Latest Message (' . date('m/d/Y', strtotime($mes->createdAt)) . ')</h3>';
+							if (isset($mes->attachments[0]->path)) {
+								echo '<img src="' . $mes->attachments[0]->path . '" />';
+							}
+							echo '<p>' . $mes->body . '</p>';
+						?>
+					</div>
 				</div>
-				<div class="col-sm-6">
-					<?php
-						echo '<h3>Points</h3> ' .  $res->currentPoints . '<br />';
-					?>
+				<div class="urban-dictionary col-md-6">
+					<h1>Urban Dictionary</h1>
+						<?php
+							$cud = curl_init();
+							curl_setopt($cud, CURLOPT_URL, 'http://api.urbandictionary.com/v0/random');
+							curl_setopt($cud, CURLOPT_HTTPHEADER, $config['classdojo']);
+							curl_setopt($cud, CURLOPT_RETURNTRANSFER, 1);
+							$ud = curl_exec($cud);
+							curl_close($cud);
+							$ud = json_decode($ud);
+
+							echo '<h3>' . $ud->list[0]->word  . '</h3>';
+						?>
+					<p>
+						<?php echo $ud->list[0]->definition; ?>
+					</p>
 				</div>
-				<div class="col-sm-12">
-					<?php
-						echo '<h3>Latest Message (' . date('m/d/Y', strtotime($mes->createdAt)) . ')</h3>';
-						if (isset($mes->attachments[0]->path)) {
-							echo '<img src="' . $mes->attachments[0]->path . '" />';
-						}
-						echo '<p>' . $mes->body . '</p>';
-					?>
-				</div>
-			</div>
 			</div>
 			<hr />
 			<div class="podio row">
