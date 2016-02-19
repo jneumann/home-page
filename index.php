@@ -11,6 +11,8 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+		<script src="home.js"></script>
+
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/main.css">
 	</head>
@@ -22,7 +24,7 @@
 			</div>
 			<div class="links row">
 				<div class="col-lg-2 col-md-2 col-sm-4">
-					<a hrf="http://bitbucket.com">
+					<a href="http://bitbucket.com">
 						<img src="images/Bitbucket.svg" />
 						Bitbucket
 					</a>
@@ -34,9 +36,9 @@
 					</a>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-4">
-					<a href="http://facebook.com">
-						<img src="images/facebook.svg" />
-						Facebook
+					<a href="http://podio.com">
+						<img src="images/Podio.svg" />
+						Podio
 					</a>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-4">
