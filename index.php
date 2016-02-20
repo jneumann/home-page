@@ -1,5 +1,7 @@
 <?php
   require('config.php');
+  require('vendor/autoload.php');
+
   date_default_timezone_set("US/Central");
 ?>
 <!DOCTYPE html>
@@ -22,7 +24,7 @@
 			<div class="title">
 				<h1>Welcome Home</h1>
 			</div>
-			<div class="links row">
+			<div class="links row hidden-xs">
 				<div class="col-lg-2 col-md-2 col-sm-4">
 					<a href="http://bitbucket.com">
 						<img src="images/Bitbucket.svg" />
@@ -60,9 +62,9 @@
 					</a>
 				</div>
 			</div>
-			<hr />
+			<hr class="hidden-xs" />
 			<div class="row">
-				<div class="weather col-md-4 col-lg-3">
+				<div class="weather col-md-4 col-lg-3 clearfix">
 					<?php
 						$cu = curl_init();
 						curl_setopt($cu, CURLOPT_URL, 'https://api.forecast.io/forecast/0b99f4b010921b26f03d8c216358378d/41.3510,-88.8391');
@@ -127,6 +129,37 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-md-6">
+					<h1>Podio</h1>
+					<?php
+						Podio::setup($config['podio']['client-id'], $config['podio']['client-secret']);
+						Podio::authenticate_with_app($config['podio']['ww-app-id'], $config['podio']['ww-app-secret']);
+						$ww = PodioItem::filter($config['podio']['ww-app-id']);
+
+						foreach($ww as $week) {
+							if ($week->title == 'Jake Neumann') {
+								$week_start = $week->fields['1']->values['start'];
+
+								if((time()-(60*60*24*7)) < strtotime($week_start->format('Y-m-d H:i:s'))) {
+									// var_dump( $week->fields );
+									foreach( (array) $week->fields as $week) {
+										foreach( (array) $week as $day) {
+											if (is_object($day) && $day->type == 'app') {
+												echo '<h4>' . $day->label . '</h4>';
+												foreach($day->values as $proj) {
+													echo '<a href="' . $proj->link . '" target="_blank">';
+													echo $proj->title;
+													echo '</a>';
+													echo '<br />';
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					?>
+				</div>
 				<div class="classdojo col-md-6">
 					<div class="col-sm-12">
 						<h1>Class Dojo</h1>
@@ -170,29 +203,8 @@
 						?>
 					</div>
 				</div>
-				<div class="urban-dictionary col-md-6">
-					<h1>Urban Dictionary</h1>
-						<?php
-							$cud = curl_init();
-							curl_setopt($cud, CURLOPT_URL, 'http://api.urbandictionary.com/v0/random');
-							curl_setopt($cud, CURLOPT_HTTPHEADER, $config['classdojo']);
-							curl_setopt($cud, CURLOPT_RETURNTRANSFER, 1);
-							$ud = curl_exec($cud);
-							curl_close($cud);
-							$ud = json_decode($ud);
-
-							echo '<h3>' . $ud->list[0]->word  . '</h3>';
-						?>
-					<p>
-						<?php echo $ud->list[0]->definition; ?>
-					</p>
-				</div>
 			</div>
-			<hr />
-			<div class="podio row">
-				<h1>Podio</h1>
-			</div>
-			<hr />
+			<hr class="hidden-xs" />
 			<div class="fitbit row">
 				<h1>Fitbit</h1>
 			</div>
